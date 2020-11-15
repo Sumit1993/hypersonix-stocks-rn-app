@@ -1,11 +1,33 @@
 import {configureStore, getDefaultMiddleware} from '@reduxjs/toolkit';
 import logger from 'redux-logger';
+import {
+  FLUSH,
+  PAUSE,
+  persistStore,
+  REHYDRATE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from 'redux-persist';
 
-import {reducer} from './rootReducer';
+import persistedReducer from './persistReducer';
 
-const middleware = [...getDefaultMiddleware(), logger];
+const middleware = [
+  ...getDefaultMiddleware({
+    serializableCheck: {
+      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+    },
+  }),
+  logger,
+];
 
-export default configureStore({
-  reducer,
-  middleware,
-});
+// export default ;
+
+export default () => {
+  let store = configureStore({
+    reducer: persistedReducer,
+    middleware,
+  });
+  let persistor = persistStore(store);
+  return {store, persistor};
+};
