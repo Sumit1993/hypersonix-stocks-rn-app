@@ -129,7 +129,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.hypersonixstocksrnapp"
+        applicationId "com.hypersonix.stocks"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

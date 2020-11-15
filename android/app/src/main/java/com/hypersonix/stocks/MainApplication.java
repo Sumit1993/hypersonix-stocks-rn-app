@@ -1,4 +1,4 @@
-package com.hypersonixstocksrnapp;
+package com.hypersonix.stocks;
 
 import android.app.Application;
 import android.content.Context;

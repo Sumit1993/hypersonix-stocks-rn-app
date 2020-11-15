@@ -1,4 +1,4 @@
-package com.hypersonixstocksrnapp;
+package com.hypersonix.stocks;
 
 import com.facebook.react.ReactActivity;
 
