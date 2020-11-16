@@ -1,7 +1,8 @@
 import {PersistConfig, persistReducer} from 'redux-persist';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import rootReducer, {RootState} from './rootReducer';
+import rootReducer from './rootReducer';
+import {RootState} from '.';
 
 const persistConfig: PersistConfig<RootState> = {
   key: 'root',

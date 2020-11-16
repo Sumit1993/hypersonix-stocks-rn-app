@@ -1,33 +1,17 @@
-import {configureStore, getDefaultMiddleware} from '@reduxjs/toolkit';
-import logger from 'redux-logger';
-import {
-  FLUSH,
-  PAUSE,
-  persistStore,
-  REHYDRATE,
-  PERSIST,
-  PURGE,
-  REGISTER,
-} from 'redux-persist';
+import {useDispatch} from 'react-redux';
+import {persistStore} from 'redux-persist';
 
-import persistedReducer from './persistReducer';
+import rootReducer from './rootReducer';
+import store from './appStore';
 
-const middleware = [
-  ...getDefaultMiddleware({
-    serializableCheck: {
-      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-    },
-  }),
-  logger,
-];
+const appStore = store();
 
-// export default ;
+export const persistor = persistStore(appStore);
 
-export default () => {
-  let store = configureStore({
-    reducer: persistedReducer,
-    middleware,
-  });
-  let persistor = persistStore(store);
-  return {store, persistor};
-};
+export type RootState = ReturnType<typeof rootReducer>;
+
+export type AppDispatch = typeof appStore.dispatch;
+
+export const useAppDispatch = () => useDispatch<AppDispatch>();
+
+export default appStore;

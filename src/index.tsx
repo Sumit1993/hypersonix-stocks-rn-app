@@ -4,9 +4,7 @@ import {PersistGate} from 'redux-persist/integration/react';
 import {enableScreens} from 'react-native-screens';
 
 import App from './App';
-import reduxstore from './store';
-
-const {store, persistor} = reduxstore();
+import store, {persistor} from './store';
 
 const Root = () => {
   enableScreens();
