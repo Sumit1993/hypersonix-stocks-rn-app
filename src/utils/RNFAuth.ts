@@ -17,6 +17,11 @@ async function signIn() {
   return auth().signInWithCredential(googleCredential);
 }
 
+function getCurrentUser() {
+  return auth().currentUser;
+}
+
 export default {
   signIn,
+  getCurrentUser,
 };

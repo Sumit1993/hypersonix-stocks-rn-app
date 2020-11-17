@@ -5,12 +5,11 @@ import rootReducer from './rootReducer';
 import {RootState} from '.';
 
 const persistConfig: PersistConfig<RootState> = {
-  key: 'root',
-  storage: AsyncStorage,
-  blacklist: [],
-  whitelist: [],
-  version: 1,
-  debug: __DEV__,
+    key: 'root',
+    storage: AsyncStorage,
+    blacklist: ['appState'],
+    version: 1,
+    debug: __DEV__,
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
