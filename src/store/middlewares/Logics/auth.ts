@@ -2,18 +2,17 @@ import {createLogic} from 'redux-logic';
 
 import {RootState} from '../..';
 import {ILogicsDeps} from '../../../models/LogicsDeps';
-import AuthActions from '../../reducers/Auth/actions';
+import BiometricAuthActions from '../../reducers/BiometricAuth/actions';
 // @ts-ignore
 import {Popup} from 'popup-ui';
 
-const {setCanAuthStatus} = AuthActions;
+const {setCanAuthStatus} = BiometricAuthActions;
 
 const cannotAuth = createLogic<RootState, any, any, ILogicsDeps>({
     type: setCanAuthStatus.type,
     async process({getState}, dispatch, done) {
-        const auth = getState().auth;
-        const {canAuthenticate} = auth;
-        if (!canAuthenticate) {
+        const bio = getState().biometricAuth;
+        if (!bio.canAuthenticate) {
             Popup.show({
                 type: 'Danger',
                 title: 'Fingerprint sensor unavailable',

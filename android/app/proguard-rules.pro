@@ -20,3 +20,8 @@
 // DEPRECATED in 4.0.0
 -keep class com.samsung.android.sdk.** { *; }
 -dontwarn com.samsung.android.sdk.**
+
+-keep class com.facebook.react.turbomodule.** { *; }
+
+-keep class com.facebook.hermes.unicode.** { *; }
+-keep class com.facebook.jni.** { *; }

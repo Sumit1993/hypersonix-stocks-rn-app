@@ -10,18 +10,18 @@ const {Logics} = middlewares;
 const logicsMiddleware = Logics();
 
 const middleware = [
-  ...getDefaultMiddleware({
-    serializableCheck: {
-      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-    },
-  }),
-  logger,
-  logicsMiddleware,
+    ...getDefaultMiddleware({
+        serializableCheck: {
+            ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+        },
+    }),
+    logger,
+    logicsMiddleware,
 ];
 
 export default () => {
-  return configureStore({
-    reducer: persistedReducer,
-    middleware,
-  });
+    return configureStore({
+        reducer: persistedReducer,
+        middleware,
+    });
 };

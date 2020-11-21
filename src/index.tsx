@@ -7,15 +7,15 @@ import App from './App';
 import store, {persistor} from './store';
 
 const Root = () => {
-  enableScreens();
+    enableScreens();
 
-  return (
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <App />
-      </PersistGate>
-    </Provider>
-  );
+    return (
+        <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}>
+                <App />
+            </PersistGate>
+        </Provider>
+    );
 };
 
 export default Root;

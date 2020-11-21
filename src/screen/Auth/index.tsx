@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {Platform, SafeAreaView} from 'react-native';
 
 import FingerprintScannerHelper from '../../helpers/FingerprintScanner';
@@ -6,13 +6,13 @@ import FingerprintPopup from '../../component/FingerprintPopup';
 import styles from './styles';
 import {RootState, useAppDispatch} from '../../store';
 import {useSelector} from 'react-redux';
-import AuthActions from '../../store/reducers/Auth/actions';
+import BiometricAuthActions from '../../store/reducers/BiometricAuth/actions';
 
-const {setCanAuthStatus, setAuthStatus} = AuthActions;
+const {setCanAuthStatus, setAuthStatus} = BiometricAuthActions;
 
 const AuthScreen = () => {
     const canAuthenticate = useSelector(
-        (state: RootState) => state.auth.canAuthenticate,
+        (state: RootState) => state.biometricAuth.canAuthenticate,
     );
 
     const dispatch = useAppDispatch();

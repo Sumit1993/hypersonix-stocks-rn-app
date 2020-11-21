@@ -14,7 +14,7 @@ const Scanner: React.FC<IProps> = (props) => {
         } catch (error) {
             Alert.alert(
                 error.name,
-                error.message,
+                'Please restart the app and try again',
                 [{text: 'Retry', onPress: () => bootstrap()}],
                 {cancelable: false},
             );

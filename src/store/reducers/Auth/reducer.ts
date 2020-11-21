@@ -2,28 +2,20 @@ import {createReducer} from '@reduxjs/toolkit';
 import {IAuth} from './types';
 import AuthActions from './actions';
 
-const {login, logout, setAuthStatus, setCanAuthStatus} = AuthActions;
+const {login, logout} = AuthActions;
 
 const initialState: IAuth = {
-  isLoggedIn: false,
-  isAuthenticated: false,
-  canAuthenticate: true,
+    isLoggedIn: false,
 };
 
 const reducer = createReducer(initialState, (builder) =>
-  builder
-    .addCase(login, (state) => {
-      state.isLoggedIn = true;
-    })
-    .addCase(logout, (state) => {
-      state.isLoggedIn = false;
-    })
-    .addCase(setAuthStatus, (state, action) => {
-      state.isAuthenticated = action.payload;
-    })
-    .addCase(setCanAuthStatus, (state, action) => {
-      state.canAuthenticate = action.payload;
-    }),
+    builder
+        .addCase(login, (state) => {
+            state.isLoggedIn = true;
+        })
+        .addCase(logout, (state) => {
+            state.isLoggedIn = false;
+        }),
 );
 
 export default reducer;

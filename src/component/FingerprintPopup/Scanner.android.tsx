@@ -26,7 +26,7 @@ const Scanner: React.FC<IProps> = (props) => {
     const alert = (error: FingerprintScannerError) => {
         Alert.alert(
             error.name,
-            error.message,
+            'Please restart the app and try again',
             [{text: 'Retry', onPress: () => bootstrap()}],
             {cancelable: false},
         );

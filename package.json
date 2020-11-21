@@ -10,6 +10,7 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
+    "@highcharts/highcharts-react-native": "^3.1.2",
     "@react-native-async-storage/async-storage": "^1.13.2",
     "@react-native-community/google-signin": "^5.0.0",
     "@react-native-community/masked-view": "^0.1.10",
@@ -19,6 +20,10 @@
     "@react-navigation/stack": "^5.12.6",
     "@reduxjs/toolkit": "^1.4.0",
     "@types/redux-logger": "^3.0.8",
+    "alphavantage": "^2.2.0",
+    "hermes-engine": "^0.5.2-rc1",
+    "highcharts": "^8.2.2",
+    "metro-config": "^0.58.0",
     "popup-ui": "^1.2.2",
     "react": "16.13.1",
     "react-native": "0.63.3",
@@ -26,17 +31,20 @@
     "react-native-elements": "^3.0.0-alpha.1",
     "react-native-fast-image": "^8.3.3",
     "react-native-fingerprint-scanner": "^6.0.0",
-    "react-native-gesture-handler": "^1.8.0",
-    "react-native-reanimated": "^1.13.1",
+    "react-native-gesture-handler": "^1.7.0",
+    "react-native-reanimated": "^2.0.0-alpha.9.1",
+    "react-native-redash": "^15.11.1",
     "react-native-safe-area-context": "^3.1.9",
     "react-native-screens": "^2.14.0",
+    "react-native-svg": "^12.1.0",
+    "react-native-unimodules": "^0.11.0",
     "react-native-vector-icons": "^7.1.0",
+    "react-native-webview": "^10.10.2",
     "react-redux": "^7.2.2",
     "redux-logger": "^3.0.6",
     "redux-logic": "^3.0.2",
     "redux-persist": "^6.0.0",
-    "rxjs": "^6.6.3",
-    "use-force-update": "^1.0.7"
+    "rxjs": "^6.6.3"
   },
   "devDependencies": {
     "@babel/core": "^7.8.4",
