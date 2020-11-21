@@ -23,7 +23,7 @@ const getStocksData = async (
             fun = isAdjusted ? getDailyAdjustedData : getDailyData;
             break;
     }
-    const chartData = await fun(symbol);
+    // const chartData = await fun(symbol);
 
     const companyOverview = await getCompanyOverview(symbol);
 

@@ -1,14 +1,14 @@
 import React from 'react';
 import {Svg} from 'react-native-svg';
 
-import Candle, {ICandle} from './Candle';
-import {SIZE} from './ChartHelpers';
+import Candle, {ICandle} from '../Candle';
+import {SIZE} from '../../helpers/ChartHelpers';
 
 interface IProps {
     data: ICandle[];
 }
 
-const Chart: React.FC<IProps> = (props) => {
+const ChartView: React.FC<IProps> = (props) => {
     const STEP = SIZE / props.data.length;
     return (
         <Svg width={SIZE} height={SIZE}>
@@ -24,4 +24,4 @@ const Chart: React.FC<IProps> = (props) => {
     );
 };
 
-export default Chart;
+export default ChartView;

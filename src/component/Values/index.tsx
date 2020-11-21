@@ -4,9 +4,9 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import Animated, {useDerivedValue} from 'react-native-reanimated';
 import {ReText} from 'react-native-redash';
 
-import Row from './Row';
-import {formatDatetime, formatUSD, SIZE} from './ChartHelpers';
-import {ICandle} from './Candle';
+import Row from '../Row';
+import {formatDatetime, formatUSD, SIZE} from '../../helpers/ChartHelpers';
+import {ICandle} from '../Candle';
 
 const styles = StyleSheet.create({
     container: {},

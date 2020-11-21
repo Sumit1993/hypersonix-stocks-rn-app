@@ -7,7 +7,7 @@ import {RootState} from '.';
 const persistConfig: PersistConfig<RootState> = {
     key: 'root',
     storage: AsyncStorage,
-    blacklist: ['appState', 'biometricAuth'],
+    blacklist: ['appState', 'biometricAuth', 'chartOptions'],
     version: 1,
     debug: __DEV__,
 };

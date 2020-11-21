@@ -5,9 +5,9 @@ import Animated, {
     useAnimatedStyle,
 } from 'react-native-reanimated';
 import {ReText} from 'react-native-redash';
-import {ICandle} from './Candle';
+import {ICandle} from '../Candle';
 
-import {formatUSD, scaleYInvert} from './ChartHelpers';
+import {formatUSD, scaleYInvert} from '../../helpers/ChartHelpers';
 
 const styles = StyleSheet.create({
     container: {

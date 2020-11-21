@@ -3,7 +3,7 @@ import {SafeAreaView} from 'react-native';
 
 import styles from './styles';
 import AlphaVantageHelper from '../../helpers/AlphaVantage';
-import StocksChart from '../../component/StocksChart/StocksChart';
+import StocksChart from '../../component/StocksChart';
 import {Unwrap} from '../../models/Unwrap';
 
 const {getStocksData} = AlphaVantageHelper;

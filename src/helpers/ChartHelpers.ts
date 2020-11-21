@@ -1,9 +1,9 @@
 import {Dimensions} from 'react-native';
 import {interpolate, Extrapolate} from 'react-native-reanimated';
 import {round} from 'react-native-redash';
-import {RawStockDaily, RawStockDailyAdjusted} from '../../models/AlphaVantage';
+import {RawStockDaily, RawStockDailyAdjusted} from '../models/AlphaVantage';
 
-import {ICandle} from './Candle';
+import {ICandle} from '../component/Candle';
 
 export const {width: SIZE} = Dimensions.get('window');
 

@@ -8,14 +8,14 @@ import Animated, {
 } from 'react-native-reanimated';
 import {clamp} from 'react-native-redash';
 
-import Chart from './Chart';
-import Values from './Values';
-import Line from './Line';
-import Header from './Header';
-import {dataConverter, SIZE} from './ChartHelpers';
+import Chart from '../ChartView';
+import Values from '../Values';
+import Line from '../Line';
+import Header from '../Header';
+import {dataConverter, SIZE} from '../../helpers/ChartHelpers';
 import {Unwrap} from '../../models/Unwrap';
 import AlphaVantageHelper from '../../helpers/AlphaVantage';
-import Label from './Label';
+import Label from '../Label';
 
 const styles = StyleSheet.create({
     container: {

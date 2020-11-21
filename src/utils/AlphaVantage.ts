@@ -7,7 +7,7 @@ import {
     RawStockDailyAdjusted,
 } from '../models/AlphaVantage';
 
-const alpha = AlphaVantage({key: ALPHA_VANTAGE_API_KEY});
+const alpha = AlphaVantage({key: "PBSET5FPPBVFTNUX"});
 
 const getCompanyOverview = (symbol: string) => {
     return alpha.fundamental.company_overview(symbol) as Promise<
