@@ -1,3 +1,6 @@
+import {Unwrap} from '../../../models/Unwrap';
+import AlphaVantageHelper from '../../../helpers/AlphaVantage';
+
 export enum ChartView {
     OHLC = 'OHLC',
     Volume = 'Volume',
@@ -20,4 +23,6 @@ export const TimeSeriesTermOptions = [
 export interface IChartOptions {
     chartView: ChartView;
     timeSeriesTerm: TimeSeriesTerm;
+    isAdjusted: boolean;
+    chartData: Unwrap<typeof AlphaVantageHelper.getStocksData> | null;
 }

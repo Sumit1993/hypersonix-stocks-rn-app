@@ -1,31 +1,35 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {SafeAreaView} from 'react-native';
 
 import styles from './styles';
 import AlphaVantageHelper from '../../helpers/AlphaVantage';
 import StocksChart from '../../component/StocksChart';
-import {Unwrap} from '../../models/Unwrap';
-
-const {getStocksData} = AlphaVantageHelper;
+import {useSelector} from 'react-redux';
+import {RootState, useAppDispatch} from '../../store';
+import ChartOptionsActions from '../../store/reducers/ChartOptions/actions';
 
 const HomeScreen = () => {
-    const [data, setData] = useState<Unwrap<typeof getStocksData>>();
+    const chartOptions = useSelector((state: RootState) => state.chartOptions);
+    const dispatch = useAppDispatch();
 
     const bootstrap = async () => {
         const result = await AlphaVantageHelper.getStocksData(
             'IBM',
             'daily',
-            true,
+            chartOptions.isAdjusted,
         );
-        setData(result);
+        dispatch(ChartOptionsActions.setChartData(result));
     };
+
     useEffect(() => {
         bootstrap();
     }, []);
 
     return (
         <SafeAreaView style={styles.container}>
-            {data && <StocksChart data={data} />}
+            {chartOptions.chartData && (
+                <StocksChart data={chartOptions.chartData} />
+            )}
         </SafeAreaView>
     );
 };

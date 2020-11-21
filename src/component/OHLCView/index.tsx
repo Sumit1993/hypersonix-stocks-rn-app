@@ -8,7 +8,7 @@ interface IProps {
     data: ICandle[];
 }
 
-const ChartView: React.FC<IProps> = (props) => {
+const OHLCView: React.FC<IProps> = (props) => {
     const STEP = SIZE / props.data.length;
     return (
         <Svg width={SIZE} height={SIZE}>
@@ -24,4 +24,4 @@ const ChartView: React.FC<IProps> = (props) => {
     );
 };
 
-export default ChartView;
+export default OHLCView;

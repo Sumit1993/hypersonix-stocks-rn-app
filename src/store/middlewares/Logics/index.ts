@@ -4,6 +4,7 @@ import {ILogicsDeps} from '../../../models/LogicsDeps';
 import RNFAuthService from '../../../utils/RNFAuth';
 import AppStateLogic from './appState';
 import AuthLogic from './auth';
+import ChartOptionsLogic from './chartOptions';
 
 const Logics = () => {
     const deps: ILogicsDeps = {
@@ -12,7 +13,10 @@ const Logics = () => {
         getFirebaseUser: RNFAuthService?.getCurrentUser,
     };
 
-    return createLogicMiddleware([...AppStateLogic, ...AuthLogic], deps);
+    return createLogicMiddleware(
+        [...AppStateLogic, ...AuthLogic, ...ChartOptionsLogic],
+        deps,
+    );
 };
 
 export default Logics;

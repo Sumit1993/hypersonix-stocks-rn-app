@@ -8,14 +8,21 @@ import Animated, {
 } from 'react-native-reanimated';
 import {clamp} from 'react-native-redash';
 
-import Chart from '../ChartView';
+import OHLCView from '../OHLCView';
 import Values from '../Values';
 import Line from '../Line';
 import Header from '../Header';
-import {dataConverter, SIZE} from '../../helpers/ChartHelpers';
+import {
+    dataConverterOHLC,
+    dataConverterVolume,
+    SIZE,
+} from '../../helpers/ChartHelpers';
 import {Unwrap} from '../../models/Unwrap';
 import AlphaVantageHelper from '../../helpers/AlphaVantage';
-import Label from '../Label';
+import {useSelector} from 'react-redux';
+import {RootState} from '../../store';
+import VolumeView from '../VolumeView';
+// import Label from '../Label';
 
 const styles = StyleSheet.create({
     container: {
@@ -28,6 +35,7 @@ interface IProps {
 }
 
 const StocksChart: React.FC<IProps> = (props) => {
+    const chartOptions = useSelector((state: RootState) => state.chartOptions);
     const STEP =
         SIZE / Object.keys(props.data.chartData['Time Series (Daily)']).length;
     Animated.addWhitelistedNativeProps({text: true});
@@ -61,7 +69,7 @@ const StocksChart: React.FC<IProps> = (props) => {
 
     return (
         <View style={styles.container}>
-            {dataConverter(props.data.chartData).length > 0 && (
+            {dataConverterOHLC(props.data.chartData).length > 0 && (
                 <>
                     <View>
                         <Animated.View
@@ -71,32 +79,48 @@ const StocksChart: React.FC<IProps> = (props) => {
                         <Animated.View pointerEvents="none" style={[showOhlc]}>
                             <Values
                                 translateX={translateX}
-                                data={dataConverter(props.data.chartData)}
+                                data={dataConverterOHLC(props.data.chartData)}
                             />
                         </Animated.View>
                     </View>
                     <View>
-                        <Chart data={dataConverter(props.data.chartData)} />
-                        <PanGestureHandler minDist={0} {...{onGestureEvent}}>
-                            <Animated.View style={StyleSheet.absoluteFill}>
-                                <Animated.View
-                                    style={[
-                                        StyleSheet.absoluteFill,
-                                        horizontal,
-                                    ]}>
-                                    <Line x={SIZE} y={0} />
-                                </Animated.View>
-                                <Animated.View
-                                    style={[StyleSheet.absoluteFill, vertical]}>
-                                    <Line x={0} y={SIZE} />
-                                </Animated.View>
-                                {/* <Label
+                        {chartOptions.chartView === 'OHLC' ? (
+                            <OHLCView
+                                data={dataConverterOHLC(props.data.chartData)}
+                            />
+                        ) : (
+                            <VolumeView
+                                data={dataConverterVolume(props.data.chartData)}
+                                meta={props.data.chartData['Meta Data']}
+                            />
+                        )}
+                        {chartOptions.chartView === 'OHLC' && (
+                            <PanGestureHandler
+                                minDist={0}
+                                {...{onGestureEvent}}>
+                                <Animated.View style={StyleSheet.absoluteFill}>
+                                    <Animated.View
+                                        style={[
+                                            StyleSheet.absoluteFill,
+                                            horizontal,
+                                        ]}>
+                                        <Line x={SIZE} y={0} />
+                                    </Animated.View>
+                                    <Animated.View
+                                        style={[
+                                            StyleSheet.absoluteFill,
+                                            vertical,
+                                        ]}>
+                                        <Line x={0} y={SIZE} />
+                                    </Animated.View>
+                                    {/* <Label
                                     translateY={translateY}
                                     opacity={opacity}
                                     data={dataConverter(props.data.chartData)}
                                 /> */}
-                            </Animated.View>
-                        </PanGestureHandler>
+                                </Animated.View>
+                            </PanGestureHandler>
+                        )}
                     </View>
                 </>
             )}

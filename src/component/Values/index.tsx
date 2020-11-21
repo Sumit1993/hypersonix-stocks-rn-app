@@ -78,7 +78,7 @@ const Values: React.FC<IProps> = (props) => {
                     : diff.value.substring(0, 4)
             }%`,
     );
-    const white = useDerivedValue(() => '#000');
+    const black = useDerivedValue(() => '#000');
     const color = useDerivedValue(() =>
         props.data[Math.floor(props.translateX.value / STEP)].close -
             props.data[Math.floor(props.translateX.value / STEP)].open >
@@ -86,22 +86,23 @@ const Values: React.FC<IProps> = (props) => {
             ? '#4AFA9A'
             : '#E33F64',
     );
-    const date = useDerivedValue(() =>
-        formatDatetime(
-            props.data[Math.floor(props.translateX.value / STEP)].date,
-        ),
+    const date = useDerivedValue(
+        () =>
+            `${formatDatetime(
+                props.data[Math.floor(props.translateX.value / STEP)].date,
+            )}`,
     );
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.table}>
                 <View style={styles.column}>
-                    <Row label="Open" value={open} color={white} />
-                    <Row label="Close" value={close} color={white} />
+                    <Row label="Open" value={open} color={black} />
+                    <Row label="Close" value={close} color={black} />
                 </View>
                 <View style={styles.separator} />
                 <View style={styles.column}>
-                    <Row label="High" value={high} color={white} />
-                    <Row label="Low" value={low} color={white} />
+                    <Row label="High" value={high} color={black} />
+                    <Row label="Low" value={low} color={black} />
                     <Row label="Change" value={change} color={color} />
                 </View>
             </View>

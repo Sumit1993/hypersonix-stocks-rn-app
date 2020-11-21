@@ -1,12 +1,19 @@
 import {createReducer} from '@reduxjs/toolkit';
 import {ChartView, IChartOptions, TimeSeriesTerm} from './types';
-import AuthActions from './actions';
+import ChartOptionsActions from './actions';
 
-const {changeChartView, changeTimeSeriesTerm} = AuthActions;
+const {
+    changeChartView,
+    changeTimeSeriesTerm,
+    setAdjusted,
+    setChartData,
+} = ChartOptionsActions;
 
 const initialState: IChartOptions = {
     chartView: ChartView.OHLC,
     timeSeriesTerm: TimeSeriesTerm.Daily,
+    isAdjusted: false,
+    chartData: null,
 };
 
 const reducer = createReducer(initialState, (builder) =>
@@ -16,6 +23,12 @@ const reducer = createReducer(initialState, (builder) =>
         })
         .addCase(changeTimeSeriesTerm, (state, action) => {
             state.timeSeriesTerm = action.payload;
+        })
+        .addCase(setAdjusted, (state, action) => {
+            state.isAdjusted = action.payload;
+        })
+        .addCase(setChartData, (state, action) => {
+            state.chartData = action.payload;
         }),
 );
 

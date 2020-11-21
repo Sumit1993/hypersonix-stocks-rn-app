@@ -12,16 +12,25 @@ import {
 } from '../../store/reducers/ChartOptions/types';
 import ChartOptionsActions from '../../store/reducers/ChartOptions/actions';
 import styles from './styles';
-
 interface IProps {
     data: CompanyOverview;
 }
 
-const {changeChartView, changeTimeSeriesTerm} = ChartOptionsActions;
+const {
+    changeChartView,
+    changeTimeSeriesTerm,
+    setAdjusted,
+} = ChartOptionsActions;
 
 const Header: React.FC<IProps> = (props) => {
     const chartOptions = useSelector((state: RootState) => state.chartOptions);
     const dispatch = useAppDispatch();
+
+    const getColor = () =>
+        parseInt(props.data.QuarterlyRevenueGrowthYOY, 10) > 0
+            ? '#4AFA9A'
+            : '#E33F64';
+
     return (
         <View style={StyleSheet.absoluteFill}>
             <SafeAreaView style={styles.container}>
@@ -43,21 +52,23 @@ const Header: React.FC<IProps> = (props) => {
                             <Text
                                 style={[
                                     styles.subtitle,
-                                    // eslint-disable-next-line react-native/no-inline-styles
                                     {
-                                        color:
-                                            parseInt(
-                                                props.data
-                                                    .QuarterlyRevenueGrowthYOY,
-                                                10,
-                                            ) > 0
-                                                ? '#4AFA9A'
-                                                : '#E33F64',
+                                        color: getColor(),
                                     },
                                 ]}>
                                 {`${props.data.QuarterlyRevenueGrowthYOY}`}
                             </Text>
                         </View>
+                    </View>
+                    <View style={styles.tabs}>
+                        <ButtonGroup
+                            onPress={() =>
+                                dispatch(setAdjusted(!chartOptions.isAdjusted))
+                            }
+                            selectedIndex={chartOptions.isAdjusted ? 0 : 1}
+                            buttons={['Adjusted', 'Raw']}
+                            containerStyle={styles.flex60}
+                        />
                     </View>
                     <View style={styles.tabs}>
                         <ButtonGroup
