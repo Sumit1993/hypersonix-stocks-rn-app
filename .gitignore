@@ -64,6 +64,6 @@ buck-out/
 /ios/Pods/
 
 # DOTENV
-.env*
+.env
 
 
