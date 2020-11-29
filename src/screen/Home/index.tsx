@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {createRef, useEffect, useState} from 'react';
 import {SafeAreaView} from 'react-native';
 
 import styles from './styles';
@@ -9,13 +9,26 @@ import {RootState} from '../../store';
 import {SearchBar} from 'react-native-elements';
 import {RawStockSearch} from '../../models/AlphaVantage';
 import SearchList from '../../component/SearchList';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {RootStackParamList} from '../../navigation/AppNav';
 
-const HomeScreen = () => {
+type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
+interface IProps {
+    navigation: HomeScreenNavigationProp;
+}
+
+const HomeScreen: React.FC<IProps> = (props) => {
+    const {navigation} = props;
     const chartOptions = useSelector((state: RootState) => state.chartOptions);
+    const searchBarRef = createRef<SearchBar>();
 
     const [searchText, setSearchText] = useState<string>('');
     const [companies, setCompanies] = useState<RawStockSearch>();
     const [searchActive, setSearchActive] = useState(false);
+
+    useEffect(() => {
+        searchBarRef.current?.focus();
+    }, []);
 
     useEffect(() => {
         const runner = async () => {
@@ -28,6 +41,7 @@ const HomeScreen = () => {
     return (
         <SafeAreaView style={styles.container}>
             <SearchBar
+                ref={searchBarRef}
                 lightTheme
                 round
                 showCancel
@@ -44,7 +58,7 @@ const HomeScreen = () => {
                 <SearchList {...{companies, setSearchActive}} />
             )}
             {!searchActive && chartOptions.chartData && (
-                <StocksChart data={chartOptions.chartData} />
+                <StocksChart data={chartOptions.chartData} {...{navigation}} />
             )}
         </SafeAreaView>
     );

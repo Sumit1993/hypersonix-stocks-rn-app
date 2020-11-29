@@ -7,6 +7,7 @@ import styles from './styles';
 import {RootState, useAppDispatch} from '../../store';
 import {useSelector} from 'react-redux';
 import BiometricAuthActions from '../../store/reducers/BiometricAuth/actions';
+import LoginBG from '../../component/LoginBG';
 
 const {setCanAuthStatus, setAuthStatus} = BiometricAuthActions;
 
@@ -40,6 +41,7 @@ const AuthScreen = () => {
 
     return (
         <SafeAreaView style={styles.container}>
+            <LoginBG />
             {canAuthenticate && (
                 <FingerprintPopup onAuthenticate={onAuthenticate} />
             )}

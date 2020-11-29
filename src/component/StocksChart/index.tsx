@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, TouchableWithoutFeedback, View} from 'react-native';
 import {PanGestureHandler} from 'react-native-gesture-handler';
 import Animated, {
     useAnimatedGestureHandler,
@@ -22,6 +22,8 @@ import AlphaVantageHelper from '../../helpers/AlphaVantage';
 import {useSelector} from 'react-redux';
 import {RootState} from '../../store';
 import VolumeView from '../VolumeView';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {RootStackParamList} from '../../navigation/AppNav';
 // import Label from '../Label';
 
 const styles = StyleSheet.create({
@@ -30,14 +32,20 @@ const styles = StyleSheet.create({
     },
 });
 
+type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
+
 interface IProps {
     data: Unwrap<typeof AlphaVantageHelper.getStocksData>;
+    navigation: HomeScreenNavigationProp;
 }
 
 const StocksChart: React.FC<IProps> = (props) => {
+    const {
+        navigation,
+        data: {chartData, companyOverview},
+    } = props;
     const chartOptions = useSelector((state: RootState) => state.chartOptions);
-    const STEP =
-        SIZE / Object.keys(props.data.chartData['Time Series (Daily)']).length;
+    const STEP = SIZE / Object.keys(chartData['Time Series (Daily)']).length;
     Animated.addWhitelistedNativeProps({text: true});
     const translateX = useSharedValue(0);
     const translateY = useSharedValue(0);
@@ -69,29 +77,35 @@ const StocksChart: React.FC<IProps> = (props) => {
 
     return (
         <View style={styles.container}>
-            {dataConverterOHLC(props.data.chartData).length > 0 && (
+            {dataConverterOHLC(chartData).length > 0 && (
                 <>
                     <View>
                         <Animated.View
                             style={[StyleSheet.absoluteFill, showHeader]}>
-                            <Header data={props.data.companyOverview} />
+                            <TouchableWithoutFeedback
+                                onPress={() =>
+                                    navigation.navigate(
+                                        'Overview',
+                                        companyOverview,
+                                    )
+                                }>
+                                <Header data={companyOverview} />
+                            </TouchableWithoutFeedback>
                         </Animated.View>
                         <Animated.View pointerEvents="none" style={[showOhlc]}>
                             <Values
                                 translateX={translateX}
-                                data={dataConverterOHLC(props.data.chartData)}
+                                data={dataConverterOHLC(chartData)}
                             />
                         </Animated.View>
                     </View>
                     <View>
                         {chartOptions.chartView === 'OHLC' ? (
-                            <OHLCView
-                                data={dataConverterOHLC(props.data.chartData)}
-                            />
+                            <OHLCView data={dataConverterOHLC(chartData)} />
                         ) : (
                             <VolumeView
-                                data={dataConverterVolume(props.data.chartData)}
-                                meta={props.data.chartData['Meta Data']}
+                                data={dataConverterVolume(chartData)}
+                                meta={chartData['Meta Data']}
                             />
                         )}
                         {chartOptions.chartView === 'OHLC' && (
@@ -116,7 +130,7 @@ const StocksChart: React.FC<IProps> = (props) => {
                                     {/* <Label
                                     translateY={translateY}
                                     opacity={opacity}
-                                    data={dataConverter(props.data.chartData)}
+                                    data={dataConverter(chartData)}
                                 /> */}
                                 </Animated.View>
                             </PanGestureHandler>
