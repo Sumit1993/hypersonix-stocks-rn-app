@@ -57,8 +57,12 @@ Like `npm start`, but also attempts to open your app on a connected Android devi
 
 You can configure the environment variables in the .env file.
 
-1. Rename the .env.example to .env file
-2. Place the ALPHA_VANTAGE_API_KEY 
+1. Rename the .env.example to .env file.
+2. Place your AlphaVantage API key against ALPHA_VANTAGE_API_KEY.
+
+## Screenshots
+
+The screenshots folder contains all the shots of running app
 
 
 

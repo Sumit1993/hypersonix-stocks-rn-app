@@ -1,6 +1,7 @@
 import {Dimensions, StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
+    f1: {flex: 1},
     container: {
         flex: 1,
         alignItems: 'flex-start',
@@ -14,6 +15,15 @@ const styles = StyleSheet.create({
     },
     list: {
         width: Dimensions.get('window').width,
+    },
+    imageContainer: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    image: {
+        height: 200,
+        width: 200,
     },
 });
 

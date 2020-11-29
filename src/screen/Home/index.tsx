@@ -1,16 +1,23 @@
 import React, {createRef, useEffect, useState} from 'react';
-import {SafeAreaView} from 'react-native';
+import {
+    Image,
+    Keyboard,
+    SafeAreaView,
+    TouchableWithoutFeedback,
+    View,
+} from 'react-native';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {SearchBar} from 'react-native-elements';
+import {useSelector} from 'react-redux';
 
 import styles from './styles';
 import AlphaVantageHelper from '../../helpers/AlphaVantage';
 import StocksChart from '../../component/StocksChart';
-import {useSelector} from 'react-redux';
 import {RootState} from '../../store';
-import {SearchBar} from 'react-native-elements';
 import {RawStockSearch} from '../../models/AlphaVantage';
 import SearchList from '../../component/SearchList';
-import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from '../../navigation/AppNav';
+import Images from '../../constants/images';
 
 type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
 interface IProps {
@@ -23,12 +30,10 @@ const HomeScreen: React.FC<IProps> = (props) => {
     const searchBarRef = createRef<SearchBar>();
 
     const [searchText, setSearchText] = useState<string>('');
-    const [companies, setCompanies] = useState<RawStockSearch>();
+    const [companies, setCompanies] = useState<RawStockSearch>({
+        bestMatches: [],
+    });
     const [searchActive, setSearchActive] = useState(false);
-
-    useEffect(() => {
-        searchBarRef.current?.focus();
-    }, []);
 
     useEffect(() => {
         const runner = async () => {
@@ -54,11 +59,27 @@ const HomeScreen: React.FC<IProps> = (props) => {
                 onBlur={() => setSearchActive(false)}
                 showLoading={true}
             />
-            {searchActive && companies && companies.bestMatches.length > 0 && (
+            {searchActive && companies.bestMatches.length > 0 && (
                 <SearchList {...{companies, setSearchActive}} />
+            )}
+            {searchActive && companies.bestMatches.length === 0 && (
+                <TouchableWithoutFeedback
+                    onPress={() => Keyboard.dismiss()}
+                    style={styles.f1}>
+                    <View style={styles.f1} />
+                </TouchableWithoutFeedback>
             )}
             {!searchActive && chartOptions.chartData && (
                 <StocksChart data={chartOptions.chartData} {...{navigation}} />
+            )}
+            {!searchActive && companies.bestMatches.length === 0 && (
+                <View style={styles.imageContainer}>
+                    <Image
+                        source={Images.search}
+                        style={styles.image}
+                        resizeMode="cover"
+                    />
+                </View>
             )}
         </SafeAreaView>
     );

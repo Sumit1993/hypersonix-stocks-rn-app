@@ -80,18 +80,15 @@ const StocksChart: React.FC<IProps> = (props) => {
             {dataConverterOHLC(chartData).length > 0 && (
                 <>
                     <View>
-                        <Animated.View
-                            style={[StyleSheet.absoluteFill, showHeader]}>
-                            <TouchableWithoutFeedback
-                                onPress={() =>
-                                    navigation.navigate(
-                                        'Overview',
-                                        companyOverview,
-                                    )
-                                }>
+                        <TouchableWithoutFeedback
+                            onPress={() =>
+                                navigation.navigate('Overview', companyOverview)
+                            }>
+                            <Animated.View
+                                style={[StyleSheet.absoluteFill, showHeader]}>
                                 <Header data={companyOverview} />
-                            </TouchableWithoutFeedback>
-                        </Animated.View>
+                            </Animated.View>
+                        </TouchableWithoutFeedback>
                         <Animated.View pointerEvents="none" style={[showOhlc]}>
                             <Values
                                 translateX={translateX}
