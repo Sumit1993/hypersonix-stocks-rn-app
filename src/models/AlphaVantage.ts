@@ -105,10 +105,59 @@ export interface RawStockDailyAdjustedTimeSeries {
           }
         | undefined;
 }
-
 export interface RawStockDailyAdjusted {
     'Meta Data': RawStockDailyAdjustedMeta;
     'Time Series (Daily)': RawStockDailyAdjustedTimeSeries;
+}
+
+export interface RawStockMonthly {
+    'Meta Data': RawStockMonthlyAdjustedMeta;
+    'Monthly Time Series': RawStockMonthlyTimeSeries;
+}
+
+export interface RawStockMonthlyAdjustedMeta {
+    '1. Information': string;
+    '2. Symbol': string;
+    '3. Last Refreshed': string;
+    '4. Time Zone': string;
+}
+
+export interface RawStockMonthlyTimeSeries {
+    [date: string]:
+        | {
+              '1. open': string;
+              '2. high': string;
+              '3. low': string;
+              '4. close': string;
+              '5. volume': string;
+          }
+        | undefined;
+}
+
+export interface RawStockMonthlyAdjustedMeta {
+    '1. Information': string;
+    '2. Symbol': string;
+    '3. Last Refreshed': string;
+    '4. Output Size': string;
+    '5. Time Zone': string;
+}
+
+export interface RawStockMonthlyAdjustedTimeSeries {
+    [date: string]:
+        | {
+              '1. open': string;
+              '2. high': string;
+              '3. low': string;
+              '4. close': string;
+              '5. adjusted close': string;
+              '6. volume': string;
+              '7. dividend amount': string;
+          }
+        | undefined;
+}
+export interface RawStockMonthlyAdjusted {
+    'Meta Data': RawStockMonthlyAdjustedMeta;
+    'Time Series (Daily)': RawStockMonthlyAdjustedTimeSeries;
 }
 
 export interface RawStockSearch {

@@ -7,6 +7,7 @@ const {
     changeTimeSeriesTerm,
     setAdjusted,
     setChartData,
+    setSymbol,
 } = ChartOptionsActions;
 
 const initialState: IChartOptions = {
@@ -14,6 +15,7 @@ const initialState: IChartOptions = {
     timeSeriesTerm: TimeSeriesTerm.Daily,
     isAdjusted: false,
     chartData: null,
+    symbol: '',
 };
 
 const reducer = createReducer(initialState, (builder) =>
@@ -29,6 +31,9 @@ const reducer = createReducer(initialState, (builder) =>
         })
         .addCase(setChartData, (state, action) => {
             state.chartData = action.payload;
+        })
+        .addCase(setSymbol, (state, action) => {
+            state.symbol = action.payload;
         }),
 );
 

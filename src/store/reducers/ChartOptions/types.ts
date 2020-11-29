@@ -25,4 +25,5 @@ export interface IChartOptions {
     timeSeriesTerm: TimeSeriesTerm;
     isAdjusted: boolean;
     chartData: Unwrap<typeof AlphaVantageHelper.getStocksData> | null;
+    symbol: string;
 }

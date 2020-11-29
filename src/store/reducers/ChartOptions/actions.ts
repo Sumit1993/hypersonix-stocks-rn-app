@@ -17,9 +17,12 @@ const setChartData = createAction<
     Unwrap<typeof AlphaVantageHelper.getStocksData>
 >('CHART_OPTIONS/SET_CHART_DATA');
 
+const setSymbol = createAction<string>('CHART_OPTIONS/SET_SYMBOL');
+
 export default {
     changeChartView,
     changeTimeSeriesTerm,
     setAdjusted,
     setChartData,
+    setSymbol,
 };

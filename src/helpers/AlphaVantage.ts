@@ -1,25 +1,27 @@
+import {TimeSeriesTerm} from '../store/reducers/ChartOptions/types';
 import AlphaVantageService from '../utils/AlphaVantage';
 
 const {
     getDailyData,
     getDailyAdjustedData,
     getCompanyOverview,
+    search,
 } = AlphaVantageService;
 
 const getStocksData = async (
     symbol: string,
-    type: 'daily' | 'monthly' | 'yearly',
+    type: TimeSeriesTerm,
     isAdjusted: boolean,
 ) => {
     let fun;
     switch (type) {
-        case 'daily':
+        case TimeSeriesTerm.Daily:
             fun = isAdjusted ? getDailyAdjustedData : getDailyData;
             break;
-        case 'monthly':
+        case TimeSeriesTerm.Monthly:
             fun = isAdjusted ? getDailyAdjustedData : getDailyData;
             break;
-        case 'yearly':
+        case TimeSeriesTerm.Yearly:
             fun = isAdjusted ? getDailyAdjustedData : getDailyData;
             break;
     }
@@ -30,4 +32,8 @@ const getStocksData = async (
     return {chartData, companyOverview};
 };
 
-export default {getStocksData};
+const searchCompanies = (keyword: string) => {
+    return search(keyword);
+};
+
+export default {getStocksData, searchCompanies};
